@@ -1,6 +1,6 @@
 {
   "name": "pizza-project",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "pizza node js project",
   "main": "index.js",
   "scripts": {

@@ -47,12 +47,21 @@ app.get('/api/products/:id', async (req, res) => {
     return res.status(404).json({ error: 'Product not found' });
   }
 
-  const images = product.images.map(img => `${req.protocol}://${req.get('host')}${img}`);
+  // Проверяем, существует ли поле img
+  if (!product.img) {
+    return res.status(404).json({ error: 'Images not found for this product' });
+  }
+
+  // Преобразуем относительные пути изображений в полные адреса
+  const images = product.img.map(img => `${req.protocol}://${req.get('host')}/${img}`);
+  // Удаляем поле img из объекта пиццы
   delete product.img;
+  // Создаем новый объект пиццы с добавленным полем images и без поля img
   const productWithImages = { ...product, images };
 
   res.json(productWithImages);
 });
+
 
 
 
