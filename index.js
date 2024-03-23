@@ -46,8 +46,15 @@ app.get('/api/products/:id', async (req, res) => {
   if (!product) {
     return res.status(404).json({ error: 'Product not found' });
   }
-  res.json(product);
+
+  const images = product.images.map(img => `${req.protocol}://${req.get('host')}${img}`);
+  delete product.img;
+  const productWithImages = { ...product, images };
+
+  res.json(productWithImages);
 });
+
+
 
 app.get('/api/toppings', async (req, res) => {
   const data = await loadData();
