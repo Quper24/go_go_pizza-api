@@ -69,11 +69,13 @@ GET /api/toppings
   "pizzas": [
     {
       "id": 1,
-      "quantity": 2
+      "crust": "thin",
+      "size": "25cm"
     },
     {
       "id": 2,
-      "quantity": 1
+      "crust": "thick",
+      "size": "35cm"
     }
   ]
 }
