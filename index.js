@@ -31,7 +31,9 @@ app.get('/api/products', async (req, res) => {
     data.pizzas;
 
   const productsWithImages = filteredProducts.map(product => {
-    const images = product.img.map(img => `${req.protocol}://${req.get('host')}/${img}`);
+    const protocol = req.get('X-Forwarded-Proto') || req.protocol;
+    const images = product.img.map(img => `${protocol}://${req.get('host')}/${img}`);
+    //const images = product.img.map(img => `${req.protocol}://${req.get('host')}/${img}`);
     const { img, ...productWithoutImg } = product;
     return { ...productWithoutImg, images };
   });
